@@ -20,6 +20,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,8 +62,9 @@ public class CurrencyServiceImpl implements CurrencyService {
         return importRootHistoryCurrencyBindingModels;
     }
 
-    @Scheduled(cron = "0 25 13 1/1 * *")
+    @Scheduled(cron = "0 0/10 * 1/1 * ?")
     private void createLastThreeMonthsRatesPDF() {
+        System.out.println("TEST CRON" + LocalDateTime.now());
         try {
             Document document = new Document();
             OutputStream file = new FileOutputStream(new File(Constants.HISTORY_CURRENCIES_FILE_PATH + Constants.HISTORY_CURRENCIES_FILE_NAME));
